@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function censor() {
+        let arrCensor = [];//создаем массив, в который будут сохраняться пары
+           return function (param1, param2){
+              if (param2 === undefined){
+                      let resultStr // создаем пустую строку
+                      let censStr = param1 // присываиваем ей параметр 1
+                      for (let i=0; i < arrCensor.length; i++){ // цикл на замену слов
+                          let regex = new RegExp(`(${arrCensor[i][0]})`, 'gi');
+                          resultStr = censStr.replace(regex, (match) => arrCensor[i][1]);
+                          censStr = resultStr
+                          }
+                      return resultStr
+              } else {
+                   arrCensor.push([param1, param2]) //если оба параметра - записываем их в массив
+                   return arrCensor;
+                  }
+          }
+      }
+      const changeScene = censor();
+      changeScene('PHP','JS');
+      changeScene('backend', 'frontend')
+      console.log(changeScene('PHP is the most popular programming language for backend web-development'));
+    </script>
+</body>
+</html>
